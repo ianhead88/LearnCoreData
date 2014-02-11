@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12C54" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="p9T-kN-mbT">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="4514" systemVersion="13B42" targetRuntime="iOS.CocoaTouch.iPad" variant="6xAndEarlier" propertyAccessControl="none" useAutolayout="YES" initialViewController="p9T-kN-mbT">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
+        <deployment defaultVersion="1552" identifier="iOS"/>
+        <development version="4600" identifier="xcode"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
     <scenes>
         <!--Split View Controller-->
@@ -18,10 +20,10 @@
             </objects>
             <point key="canvasLocation" x="-2831" y="-485"/>
         </scene>
-        <!--Stanford Photo TagsTVC - Stanford Photos-->
+        <!--Stanford Photo TagsCDTVC - Stanford Photos-->
         <scene sceneID="UP4-78-zJK">
             <objects>
-                <tableViewController id="Caf-Dh-bEP" customClass="StanfordPhotoTagsTVC" sceneMemberID="viewController">
+                <tableViewController id="Caf-Dh-bEP" customClass="StanfordPhotoTagsCDTVC" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="JBY-Cd-EI5">
                         <rect key="frame" x="0.0" y="64" width="320" height="739"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -35,13 +37,13 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1C4-8t-cev">
-                                            <rect key="frame" x="10" y="2" width="38" height="22"/>
+                                            <rect key="frame" x="10" y="2" width="36" height="22"/>
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         </label>
                                         <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Kcz-H3-mea">
-                                            <rect key="frame" x="10" y="24" width="47" height="18"/>
+                                            <rect key="frame" x="10" y="24" width="50" height="17"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <color key="textColor" red="0.50196078430000002" green="0.50196078430000002" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -78,10 +80,14 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="PVc-8J-EzR">
+                                <rect key="frame" x="366" y="484" width="37" height="37"/>
                                 <color key="color" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                             </activityIndicatorView>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S1E-o4-Q4T"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S1E-o4-Q4T">
+                                <rect key="frame" x="0.0" y="44" width="768" height="960"/>
+                            </scrollView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4HD-p7-cQe">
+                                <rect key="frame" x="0.0" y="0.0" width="768" height="44"/>
                                 <items>
                                     <barButtonItem title="Show URL" id="RZ3-6a-ept">
                                         <connections>
@@ -130,10 +136,8 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CR6-zp-fZ5">
+                                <rect key="frame" x="0.0" y="0.0" width="300" height="200"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="200" id="EGk-zL-d1T"/>
-                                </constraints>
                                 <attributedString key="attributedText">
                                     <fragment content="Attributed String">
                                         <attributes>
@@ -148,7 +152,8 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="CR6-zp-fZ5" firstAttribute="leading" secondItem="V0n-pe-DH6" secondAttribute="leading" type="default" id="AWq-gV-CSb"/>
-                            <constraint firstItem="CR6-zp-fZ5" firstAttribute="top" secondItem="V0n-pe-DH6" secondAttribute="top" constant="4" id="ImJ-eO-eJW"/>
+                            <constraint firstAttribute="bottom" secondItem="CR6-zp-fZ5" secondAttribute="bottom" type="default" id="B01-va-CvE"/>
+                            <constraint firstItem="CR6-zp-fZ5" firstAttribute="top" secondItem="V0n-pe-DH6" secondAttribute="top" type="default" id="SUM-Ja-cEb"/>
                             <constraint firstItem="CR6-zp-fZ5" firstAttribute="trailing" secondItem="V0n-pe-DH6" secondAttribute="trailing" type="default" id="XJo-b7-AHL"/>
                         </constraints>
                     </view>
@@ -161,10 +166,10 @@
             </objects>
             <point key="canvasLocation" x="2592" y="-571"/>
         </scene>
-        <!--Standford PhotoTVC-->
+        <!--Photos By TagCDTVC-->
         <scene sceneID="Yg1-gV-u3D">
             <objects>
-                <tableViewController id="8re-sq-adz" customClass="StandfordPhotoTVC" sceneMemberID="viewController">
+                <tableViewController id="8re-sq-adz" customClass="PhotosByTagCDTVC" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="7n1-nC-ep7">
                         <rect key="frame" x="0.0" y="64" width="320" height="739"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -178,13 +183,13 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="J5d-fz-ZQp">
-                                            <rect key="frame" x="10" y="2" width="38" height="22"/>
+                                            <rect key="frame" x="10" y="2" width="36" height="22"/>
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         </label>
                                         <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Cpr-NF-YnL">
-                                            <rect key="frame" x="10" y="24" width="47" height="18"/>
+                                            <rect key="frame" x="10" y="24" width="50" height="17"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <color key="textColor" red="0.50196078430000002" green="0.50196078430000002" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -269,10 +274,10 @@
             </objects>
             <point key="canvasLocation" x="-409" y="401"/>
         </scene>
-        <!--RecentsTVC-->
+        <!--RecentsCDTVC-->
         <scene sceneID="Pko-fJ-RDx">
             <objects>
-                <tableViewController id="Arx-P6-fES" customClass="RecentsTVC" sceneMemberID="viewController">
+                <tableViewController id="Arx-P6-fES" customClass="RecentsCDTVC" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="eW8-H0-c9I">
                         <rect key="frame" x="0.0" y="64" width="320" height="739"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -296,7 +301,7 @@
                     <navigationItem key="navigationItem" id="Irf-KM-LLT"/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackTranslucent"/>
                     <connections>
-                        <segue destination="VrW-vv-9Ur" kind="replace" splitViewControllerTargetIndex="1" id="yS9-oN-6wu"/>
+                        <segue destination="VrW-vv-9Ur" kind="replace" identifier="Show Image" splitViewControllerTargetIndex="1" id="yS9-oN-6wu"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vvK-0S-McR" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -304,40 +309,6 @@
             <point key="canvasLocation" x="517" y="483"/>
         </scene>
     </scenes>
-    <classes>
-        <class className="AttributedStringViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/AttributedStringViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="textView" candidateClass="UITextView"/>
-            </relationships>
-        </class>
-        <class className="ImageViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ImageViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
-                <relationship kind="outlet" name="spinner" candidateClass="UIActivityIndicatorView"/>
-                <relationship kind="outlet" name="titleBarButtonItem" candidateClass="UIBarButtonItem"/>
-            </relationships>
-        </class>
-        <class className="NSLayoutConstraint" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
-        </class>
-        <class className="RecentsTVC" superclassName="StandfordPhotoTVC">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RecentsTVC.h"/>
-        </class>
-        <class className="StandfordPhotoTVC" superclassName="TVC">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/StandfordPhotoTVC.h"/>
-        </class>
-        <class className="StanfordPhotoTagsTVC" superclassName="TVC">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/StanfordPhotoTagsTVC.h"/>
-        </class>
-        <class className="TVC" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/TVC.h"/>
-        </class>
-        <class className="UIRefreshControl" superclassName="UIControl">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/UIRefreshControl.h"/>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
         <simulatedOrientationMetrics key="orientation"/>

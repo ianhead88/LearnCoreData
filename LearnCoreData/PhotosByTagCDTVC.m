@@ -7,6 +7,9 @@
 //
 
 #import "PhotosByTagCDTVC.h"
+#import "Photo.h"
+#import "RecentPhotos+create.h"
+
 
 @interface PhotosByTagCDTVC ()
 
@@ -14,25 +17,97 @@
 
 @implementation PhotosByTagCDTVC
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+-(void)setTag:(Tags *)tag
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
+    _tag = tag;
+    [self setupFetchedResultsController];
+    self.title = [tag.name capitalizedString];
+}
+
+-(void)setupFetchedResultsController
+{
+    if (self.tag.managedObjectContext) {
+        NSLog(@"self.tag.managed object context");
+        NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Photo"];
+        request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"title" ascending:YES selector:@selector(localizedCaseInsensitiveCompare:)]];
+        request.predicate = [NSPredicate predicateWithFormat:@"%@ IN whatTags", self.tag];
+        
+        self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:request
+                                                                            managedObjectContext:self.tag.managedObjectContext
+                                                                              sectionNameKeyPath:nil
+                                                                                       cacheName:nil];
     }
-    return self;
+    else {
+        self.fetchedResultsController = nil;
+    }
 }
 
-- (void)viewDidLoad
+-(UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [super viewDidLoad];
-	// Do any additional setup after loading the view.
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"flickr photo"];
+    
+    Photo *photo = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    
+    cell.textLabel.text = [photo.title capitalizedString];
+    cell.detailTextLabel.text = photo.photoDescription;
+    cell.imageView.image = [UIImage imageWithData:photo.thumbData];
+    
+    if (!cell.imageView.image) {
+        dispatch_queue_t fetchQ = dispatch_queue_create("ThumbFetch", NULL);
+        dispatch_async(fetchQ, ^{
+            //does not need to be done on the main thread because the URL Fetch has already happened
+            NSData *imageData = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:photo.photoURL_thumb]];
+            //[NSThread sleepForTimeInterval:1.5];
+            [photo.managedObjectContext performBlock:^{
+                //this needs to be done on the main thread because managedObjectContext operate on the mainthread
+                photo.thumbData = imageData;
+                dispatch_async(dispatch_get_main_queue(), ^{
+                //need to wait for the main thread before redrawing the layouts
+                [cell setNeedsLayout]; // not sure if this is really necessary
+                });
+            }];
+        });
+        
+    }
+
+    return cell;
+    
 }
 
-- (void)didReceiveMemoryWarning
+- (void)sendDataForIndexPath:(NSIndexPath *)indexPath toViewController:(UIViewController *)vc
 {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    if ([vc respondsToSelector:@selector(setImageURL:)]) {
+        
+        Photo *photo = [self.fetchedResultsController objectAtIndexPath:indexPath];
+        
+        NSURL *url;
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+            url = [NSURL URLWithString:photo.photoURL_phone];
+        }
+        else {
+            url = [NSURL URLWithString:photo.photoURL_ipad];
+        }
+        
+        [vc performSelector:@selector(setImageURL:) withObject:url];
+        
+        [RecentPhotos recentPhotoWithPhoto:photo inManagedObjectContext:photo.managedObjectContext];
+
+    //    [vc setTitle:[self titleForRow:[url absoluteString]]];
+    }
 }
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([sender isKindOfClass:[UITableViewCell class]]) {
+        
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
+        if (indexPath) {
+            if ([segue.identifier isEqualToString:@"Show Image"]) {
+                [self sendDataForIndexPath:indexPath toViewController:segue.destinationViewController];
+            }
+        }
+    }
+}
+
 
 @end

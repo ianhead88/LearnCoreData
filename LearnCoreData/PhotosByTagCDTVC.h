@@ -7,7 +7,10 @@
 //
 
 #import "CoreDataTableViewController.h"
+#import "Tags.h"
 
 @interface PhotosByTagCDTVC : CoreDataTableViewController
+
+@property (nonatomic, strong) Tags *tag;
 
 @end

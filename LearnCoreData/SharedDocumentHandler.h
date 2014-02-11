@@ -10,4 +10,12 @@
 
 @interface SharedDocumentHandler : NSObject
 
+@property (nonatomic, strong) UIManagedDocument *sharedDocument;
+
++(SharedDocumentHandler *)sharedManagedDocument;
+
+-(void)saveDocument;
+
+
+
 @end

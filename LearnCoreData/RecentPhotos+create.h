@@ -7,7 +7,11 @@
 //
 
 #import "RecentPhotos.h"
+#import "Photo.h"
 
 @interface RecentPhotos (create)
+
++(RecentPhotos *)recentPhotoWithPhoto:(Photo *)photo
+               inManagedObjectContext:(NSManagedObjectContext *)context;
 
 @end

@@ -7,7 +7,12 @@
 //
 
 #import "CoreDataTableViewController.h"
+#import "RecentPhotos.h"
+
 
 @interface RecentsCDTVC : CoreDataTableViewController
+
+@property (nonatomic, strong) RecentPhotos *recents;
+@property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 
 @end

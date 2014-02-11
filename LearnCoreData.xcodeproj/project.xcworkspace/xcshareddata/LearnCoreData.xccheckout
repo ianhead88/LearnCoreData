@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>60251313-4CAF-4197-9BBF-6DF8080BFB31</string>
+	<key>IDESourceControlProjectName</key>
+	<string>LearnCoreData</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>280E1099-6881-4C99-9258-06EE84779EBA</key>
+		<string>https://github.com/ianhead88/LearnCoreData.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>LearnCoreData.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>280E1099-6881-4C99-9258-06EE84779EBA</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/ianhead88/LearnCoreData.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>280E1099-6881-4C99-9258-06EE84779EBA</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>280E1099-6881-4C99-9258-06EE84779EBA</string>
+			<key>IDESourceControlWCCName</key>
+			<string>LearnCoreData</string>
+		</dict>
+	</array>
+</dict>
+</plist>

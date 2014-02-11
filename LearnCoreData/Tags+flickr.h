@@ -10,4 +10,8 @@
 
 @interface Tags (flickr)
 
++(NSSet *)TagsFromFlickr:(NSDictionary *)photoDictionary
+ inManagedObjectContext:(NSManagedObjectContext *)context;
+
+
 @end

@@ -10,4 +10,6 @@
 
 @interface StanfordPhotoTagsCDTVC : CoreDataTableViewController
 
+@property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
+
 @end

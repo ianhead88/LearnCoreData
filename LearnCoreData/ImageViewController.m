@@ -59,46 +59,6 @@
     [self resetImage];
 }
 
--(void)writeCache:(NSData *)withData
-{
-        NSFileManager *fileManager = [[NSFileManager alloc] init];
-        NSArray *urls = [fileManager URLsForDirectory:NSCachesDirectory inDomains:NSUserDomainMask];
-        NSURL *url = [urls[0] URLByAppendingPathComponent:[self.imageURL lastPathComponent]];
-    
-        NSArray *files = [fileManager contentsOfDirectoryAtURL:urls[0]
-                  includingPropertiesForKeys:nil
-                                     options:NSDirectoryEnumerationSkipsHiddenFiles
-                                       error:nil];
-
-        BOOL matchingFile = FALSE;
-        for (NSURL *file in files) {
-        if ([[file absoluteString] isEqualToString:[url absoluteString]])
-            matchingFile = TRUE;
-        }
-    
-        if (!matchingFile)
-            [withData writeToURL:url atomically:NO];
-    
-#pragma part of the code removes older files in the cache
-    
-        NSMutableDictionary *dateDict = [NSMutableDictionary dictionary];
-
-        if ([files count] > 5) {
-
-            for (NSURL *file in files) {
-                NSDictionary *dateDictEntry = [file resourceValuesForKeys:@[NSURLContentAccessDateKey] error:nil];
-                NSString *urlString = [file absoluteString];
-                [dateDict setValue:urlString forKey:dateDictEntry[NSURLContentAccessDateKey]];
-            }
-            NSArray *dates = [dateDict allKeys];
-            NSArray *sortedDates = [dates sortedArrayUsingSelector:@selector(compare:)];
-            
-            NSURL *lastURL = [[NSURL alloc] initWithString:dateDict[sortedDates[0]]];
-
-            [fileManager removeItemAtURL:lastURL error:nil];            
-        }
-}
-
 -(void) resetImage
 {
     if (self.scrollView) {
@@ -129,7 +89,7 @@
             NSData *imageData = [[NSData alloc] initWithContentsOfURL:possibleCacheURL];
             UIImage *image =[[UIImage alloc] initWithData:imageData];
             if (self.imageURL == imageURL) {
-                [self writeCache:imageData];
+                //[self writeCache:imageData];
                 dispatch_async(dispatch_get_main_queue(), ^{
                     
                     if (image) {
@@ -162,6 +122,47 @@
 
     }
 }
+
+-(void)writeCache:(NSData *)withData
+{
+    NSFileManager *fileManager = [[NSFileManager alloc] init];
+    NSArray *urls = [fileManager URLsForDirectory:NSCachesDirectory inDomains:NSUserDomainMask];
+    NSURL *url = [urls[0] URLByAppendingPathComponent:[self.imageURL lastPathComponent]];
+    
+    NSArray *files = [fileManager contentsOfDirectoryAtURL:urls[0]
+                                includingPropertiesForKeys:nil
+                                                   options:NSDirectoryEnumerationSkipsHiddenFiles
+                                                     error:nil];
+    
+    BOOL matchingFile = FALSE;
+    for (NSURL *file in files) {
+        if ([[file absoluteString] isEqualToString:[url absoluteString]])
+            matchingFile = TRUE;
+    }
+    
+    if (!matchingFile)
+        [withData writeToURL:url atomically:NO];
+    
+#pragma part of the code removes older files in the cache
+    
+    NSMutableDictionary *dateDict = [NSMutableDictionary dictionary];
+    
+    if ([files count] > 5) {
+        
+        for (NSURL *file in files) {
+            NSDictionary *dateDictEntry = [file resourceValuesForKeys:@[NSURLContentAccessDateKey] error:nil];
+            NSString *urlString = [file absoluteString];
+            [dateDict setValue:urlString forKey:dateDictEntry[NSURLContentAccessDateKey]];
+        }
+        NSArray *dates = [dateDict allKeys];
+        NSArray *sortedDates = [dates sortedArrayUsingSelector:@selector(compare:)];
+        
+        NSURL *lastURL = [[NSURL alloc] initWithString:dateDict[sortedDates[0]]];
+        
+        [fileManager removeItemAtURL:lastURL error:nil];
+    }
+}
+
 
 - (UIImageView *) imageView
 {
